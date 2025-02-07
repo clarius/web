@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="/Web/assets/css/style.css?v=6dc51ff34dc976faa3e9afd5b0ac67bc19878e2e">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>HTML =&gt; XML + CSS with XLinq 🤘 | Web</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="HTML =&gt; XML + CSS with XLinq 🤘" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="XLinq to Web" />
+<meta property="og:description" content="XLinq to Web" />
+<meta property="og:site_name" content="Web" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HTML =&gt; XML + CSS with XLinq 🤘" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"XLinq to Web","headline":"HTML =&gt; XML + CSS with XLinq 🤘","name":"Web","url":"/Web/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/Web/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          
+            <a id="forkme_banner" href="https://github.com/devlooped/Web">View on GitHub</a>
+          
+
+          <h1 id="project_title">Web</h1>
+          <h2 id="project_tagline">XLinq to Web</h2>
+
+          
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1 id="-html--xml--css-with-xlinq-"><img src="https://raw.githubusercontent.com/devlooped/web/main/assets/icon.png" alt="Icon" /> HTML =&gt; XML + CSS with XLinq 🤘</h1>
+
+<p><a href="https://www.nuget.org/packages/Devlooped.Web"><img src="https://img.shields.io/nuget/vpre/Devlooped.Web.svg?color=royalblue" alt="Version" /></a>
+<a href="https://www.nuget.org/packages/Devlooped.Web"><img src="https://img.shields.io/nuget/dt/Devlooped.Web.svg?color=green" alt="Downloads" /></a>
+<a href="https://github.com/devlooped/web/blob/main/license.txt"><img src="https://img.shields.io/github/license/devlooped/web.svg?color=blue" alt="License" /></a></p>
+
+<!-- #content -->
+<!-- include https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
+<p><em>This project uses <a href="https://github.com/devlooped#sponsorlink">SponsorLink</a> 
+and may issue IDE-only warnings if no active sponsorship is detected.</em></p>
+
+<!-- https://github.com/devlooped/.github/raw/main/sponsorlink.md -->
+
+<p>Read HTML as XML and query it with CSS over XLinq (or HtmlAgilityPack killer 😉). 
+Provides <code class="language-plaintext highlighter-rouge">HtmlDocument.Load</code> and <code class="language-plaintext highlighter-rouge">CssSelectElement(s)</code> extension methods 
+for <code class="language-plaintext highlighter-rouge">XDocument</code>/<code class="language-plaintext highlighter-rouge">XElement</code>.</p>
+
+<p>No need to learn an entirely new object model for a page 🤘. 
+This makes it the most productive and lean library for web 
+scraping using the latest and greatest that .NET can offer.</p>
+
+<h1 id="usage">Usage</h1>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Xml.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Devlooped.Web</span><span class="p">;</span>
+
+<span class="n">XDocument</span> <span class="n">page</span> <span class="p">=</span> <span class="n">HtmlDocument</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">"page.html"</span><span class="p">)</span>
+<span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">XElement</span><span class="p">&gt;</span> <span class="n">elements</span> <span class="p">=</span> <span class="n">page</span><span class="p">.</span><span class="nf">CssSelectElements</span><span class="p">(</span><span class="s">"div.menuitem"</span><span class="p">);</span>
+
+<span class="n">XElement</span> <span class="n">title</span> <span class="p">=</span> <span class="n">page</span><span class="p">.</span><span class="nf">CssSelectElement</span><span class="p">(</span><span class="s">"html head meta[name=title]"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>By default, <code class="language-plaintext highlighter-rouge">HtmlDocument.Load</code> will skip non-content elements <code class="language-plaintext highlighter-rouge">script</code> and 
+<code class="language-plaintext highlighter-rouge">style</code>, turn all element names into lower case, and ignore all XML namespaces 
+(useful when loading XHTML, for example) for easier querying. These options 
+as well as granular whitespace handling can be configured using the overloads 
+receiving an <code class="language-plaintext highlighter-rouge">HtmlReaderSettings</code>.</p>
+
+<p>The underlying parsing is performed by the amazing <a href="https://www.nuget.org/packages/Microsoft.Xml.SgmlReader">SgmlReader</a> 
+library by Microsoft’s <a href="http://lovettsoftware.com/">Chris Lovett</a>.</p>
+
+<p>In addition, the following extension methods make it easier to work 
+with XML documents where you want to query with CSS or XPath without 
+having to deal with XML namespaces:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="nn">System.Xml</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">System.Xml.Linq</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Devlooped.Web</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">doc</span> <span class="p">=</span> <span class="n">XDocument</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">"doc.xml"</span><span class="p">)</span>
+<span class="c1">// Will remove all xmlns declarations, and allow querying elements </span>
+<span class="c1">// as if none had namespaces, returns the root element</span>
+<span class="n">XElement</span> <span class="n">nons</span> <span class="p">=</span> <span class="n">doc</span><span class="p">.</span><span class="nf">RemoveNamespaces</span><span class="p">();</span>
+
+<span class="c1">// Alternatively, you can also ignore at the XmlReader level</span>
+<span class="k">using</span> <span class="nn">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="n">XmlReader</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"doc.xml"</span><span class="p">).</span><span class="nf">IgnoreNamespaces</span><span class="p">();</span>
+<span class="n">doc</span> <span class="p">=</span> <span class="n">XDocument</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+
+<span class="c1">// Finally, you can also skip elements at the reader level</span>
+<span class="k">using</span> <span class="nn">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="n">XmlReader</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">"doc.xml"</span><span class="p">).</span><span class="nf">SkipElements</span><span class="p">(</span><span class="s">"foo"</span><span class="p">,</span> <span class="s">"bar"</span><span class="p">);</span>
+<span class="n">doc</span> <span class="p">=</span> <span class="n">XDocument</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="css">CSS</h2>
+
+<p>At the moment, supports the following CSS selector features:</p>
+
+<ul>
+  <li><a href="https://www.w3.org/TR/selectors-3/#type-selectors">Type selector</a></li>
+  <li><a href="https://www.w3.org/TR/selectors-3/#universal-selector">Universal selector</a></li>
+  <li><a href="https://www.w3.org/TR/selectors-3/#attribute-selectors">Attribute selector</a></li>
+  <li><a href="https://www.w3.org/TR/selectors-3/#class-html">Class selector</a></li>
+  <li><a href="https://www.w3.org/TR/selectors-3/#id-selectors">ID selector</a></li>
+  <li><a href="https://www.w3.org/TR/selectors-3/#pseudo-classes">Pseudo-classes</a>:
+    <ul>
+      <li><a href="https://www.w3.org/TR/selectors-3/#checked">:checked</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#first-child-pseudo">:first-child</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#last-child-pseudo">:last-child</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#only-child-pseudo">:only-child</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#empty-pseudo">:empty</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#first-of-type-pseudo">:first-of-type</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#last-of-type-pseudo">:last-of-type</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#negation">:not(…)</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#nth-of-type-pseudo">:nth-of-type(n)</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-3/#nth-child-pseudo">:nth-child(n)</a></li>
+      <li><a href="https://www.w3.org/TR/selectors-4/#has-pseudo">:has(…)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>And all <a href="https://www.w3.org/TR/selectors-3/#combinators">combinators</a></p>
+
+<p>Non-CSS features:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">text()</code> pseudo-attribute selector: selects the node text contents, as specified 
+in the <a href="https://www.w3.org/TR/1999/REC-xpath-19991116/">XPath</a> <code class="language-plaintext highlighter-rouge">text()</code> location 
+path. Can be used instead of an attribute name selector, such as <code class="language-plaintext highlighter-rouge">div[text()=foo]</code>. 
+All <a href="https://www.w3.org/TR/selectors-3/#attribute-selectors">attribute value selectors</a> 
+are also supported:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">[text()=val]</code>: Represents an element whose text contents is exactly “val”.</li>
+      <li><code class="language-plaintext highlighter-rouge">[text()~=val]</code>: Represents an element whose text contents is a whitespace-separated list of words, 
+ one of which is exactly “val”. If “val” contains whitespace, it will never represent anything (since the words 
+ are separated by spaces). Also if “val” is the empty string, it will never represent anything.</li>
+      <li><code class="language-plaintext highlighter-rouge">[text()|=val]</code>: Represents an element whose text contents either being exactly “val” or 
+ beginning with “val” immediately followed by “-“ (U+002D).</li>
+      <li><code class="language-plaintext highlighter-rouge">[text()^=val]</code>: Represents an element whose text contents begins with the prefix “val”. 
+ If “val” is the empty string then the selector does not represent anything.</li>
+      <li><code class="language-plaintext highlighter-rouge">[text()$=val]</code>: Represents an element whose text contents ends with the suffix “val”. 
+ If “val” is the empty string then the selector does not represent anything.</li>
+      <li><code class="language-plaintext highlighter-rouge">[text()*=val]</code>: Represents an element whose text contents contains at least one instance of the 
+ substring “val”. If “val” is the empty string then the selector does not represent anything.</li>
+    </ul>
+  </li>
+</ul>
+
+<!-- #content -->
+
+<h1 id="dogfooding">Dogfooding</h1>
+
+<p><a href="https://pkg.kzu.io/index.json"><img src="https://img.shields.io/endpoint?url=https://shields.kzu.io/vpre/Devlooped.Web/main&amp;label=nuget.ci&amp;color=brightgreen" alt="CI Version" /></a>
+<a href="https://github.com/devlooped/web/actions"><img src="https://github.com/devlooped/web/workflows/build/badge.svg?branch=main" alt="Build" /></a></p>
+
+<p>We also produce CI packages from branches and pull requests so you can dogfood builds as quickly as they are produced.</p>
+
+<p>The CI feed is <code class="language-plaintext highlighter-rouge">https://pkg.kzu.io/index.json</code>.</p>
+
+<p>The versioning scheme for packages is:</p>
+
+<ul>
+  <li>PR builds: <em>42.42.42-pr</em><code class="language-plaintext highlighter-rouge">[NUMBER]</code></li>
+  <li>Branch builds: <em>42.42.42-</em><code class="language-plaintext highlighter-rouge">[BRANCH]</code>.<code class="language-plaintext highlighter-rouge">[COMMITS]</code></li>
+</ul>
+
+<!-- #sponsors -->
+<!-- include https://github.com/devlooped/sponsors/raw/main/footer.md -->
+<h1 id="sponsors">Sponsors</h1>
+
+<!-- sponsors.md -->
+<p><a href="https://github.com/clarius"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/clarius.png" alt="Clarius Org" title="Clarius Org" /></a>
+<a href="https://github.com/MFB-Technologies-Inc"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/MFB-Technologies-Inc.png" alt="MFB Technologies, Inc." title="MFB Technologies, Inc." /></a>
+<a href="https://github.com/torutek-gh"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/torutek-gh.png" alt="Torutek" title="Torutek" /></a>
+<a href="https://github.com/drivenet"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/drivenet.png" alt="DRIVE.NET, Inc." title="DRIVE.NET, Inc." /></a>
+<a href="https://github.com/Keflon"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/Keflon.png" alt="Keith Pickford" title="Keith Pickford" /></a>
+<a href="https://github.com/tbolon"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/tbolon.png" alt="Thomas Bolon" title="Thomas Bolon" /></a>
+<a href="https://github.com/kfrancis"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/kfrancis.png" alt="Kori Francis" title="Kori Francis" /></a>
+<a href="https://github.com/twenzel"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/twenzel.png" alt="Toni Wenzel" title="Toni Wenzel" /></a>
+<a href="https://github.com/unoplatform"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/unoplatform.png" alt="Uno Platform" title="Uno Platform" /></a>
+<a href="https://github.com/dansiegel"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/dansiegel.png" alt="Dan Siegel" title="Dan Siegel" /></a>
+<a href="https://github.com/rbnswartz"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/rbnswartz.png" alt="Reuben Swartz" title="Reuben Swartz" /></a>
+<a href="https://github.com/jfoshee"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/jfoshee.png" alt="Jacob Foshee" title="Jacob Foshee" /></a>
+<a href="https://github.com/eajhnsn1"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/Mrxx99.png" alt="" title="&quot;)](https://github.com/Mrxx99)
+[![Eric Johnson](https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/eajhnsn1.png &quot;Eric Johnson" /></a>
+<a href="https://github.com/IxTechnologies"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/IxTechnologies.png" alt="Ix Technologies B.V." title="Ix Technologies B.V." /></a>
+<a href="https://github.com/davidjenni"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/davidjenni.png" alt="David JENNI" title="David JENNI" /></a>
+<a href="https://github.com/Jonathan-Hickey"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/Jonathan-Hickey.png" alt="Jonathan " title="Jonathan " /></a>
+<a href="https://github.com/akunzai"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/akunzai.png" alt="Charley Wu" title="Charley Wu" /></a>
+<a href="https://github.com/jakobt"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/jakobt.png" alt="Jakob Tikjøb Andersen" title="Jakob Tikjøb Andersen" /></a>
+<a href="https://github.com/tinohager"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/tinohager.png" alt="Tino Hager" title="Tino Hager" /></a>
+<a href="https://github.com/KenBonny"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/KenBonny.png" alt="Ken Bonny" title="Ken Bonny" /></a>
+<a href="https://github.com/SimonCropp"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/SimonCropp.png" alt="Simon Cropp" title="Simon Cropp" /></a>
+<a href="https://github.com/agileworks-eu"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/agileworks-eu.png" alt="agileworks-eu" title="agileworks-eu" /></a>
+<a href="https://github.com/sorahex"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/sorahex.png" alt="sorahex" title="sorahex" /></a>
+<a href="https://github.com/arsdragonfly"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/arsdragonfly.png" alt="Zheyu Shen" title="Zheyu Shen" /></a>
+<a href="https://github.com/vezel-dev"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/vezel-dev.png" alt="Vezel" title="Vezel" /></a>
+<a href="https://github.com/ChilliCream"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/ChilliCream.png" alt="ChilliCream" title="ChilliCream" /></a>
+<a href="https://github.com/4OTC"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/4OTC.png" alt="4OTC" title="4OTC" /></a>
+<a href="https://github.com/v-limo"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/v-limo.png" alt="Vincent Limo" title="Vincent Limo" /></a>
+<a href="https://github.com/jordansjones"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/jordansjones.png" alt="Jordan S. Jones" title="Jordan S. Jones" /></a>
+<a href="https://github.com/DominicSchell"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/.github/avatars/DominicSchell.png" alt="domischell" title="domischell" /></a></p>
+
+<!-- sponsors.md -->
+
+<p><a href="https://github.com/sponsors/devlooped"><img src="https://raw.githubusercontent.com/devlooped/sponsors/main/sponsor.png" alt="Sponsor this project" title="Sponsor this project" /></a>
+ </p>
+
+<p><a href="https://github.com/sponsors">Learn more about GitHub Sponsors</a></p>
+
+<!-- https://github.com/devlooped/sponsors/raw/main/footer.md -->
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        
+        <p class="copyright">Web maintained by <a href="https://github.com/devlooped">devlooped</a></p>
+        
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
